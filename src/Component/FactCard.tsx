@@ -3,7 +3,7 @@ import TimeStamp from "~Component/TimeStamp"
 
 const FactCard = ({TrueFact=true}) => {
   return (
-    <div className={`w-[362px] h-[300px] absolute top-[60px] bg-green-100 opacity-65 p-[5px] my-2 rounded-xl border-l-green-600 border-l-4`}>
+    <div className={`w-[362px] h-[300px] bg-green-100 opacity-65 p-[5px] my-2 rounded-xl border-l-green-600 border-l-4`}>
       <TimeStamp  text={'9:18'}/>
       <p className={'mt-1 text-[13px] font-semibold'} >
         “The EU’s Renewable Energy Directive aims For 42.5% renerenewal able energy by 2030”

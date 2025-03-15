@@ -1,7 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  box-sizing: border-box;
+}
 
+html, body {
+  height: 100%;
+  /*overflow: hidden; !* Prevent the entire page from blocking scrolling *!*/
+}
+body {
+  min-width: 300px;
+  max-height: 600px;
+  overflow-y: auto;
+}
 
 .new-tab {
   background-color: #f0f0f0;
