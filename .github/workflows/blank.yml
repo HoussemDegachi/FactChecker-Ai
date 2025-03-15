@@ -12,5 +12,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20.16.0
-      - run: npm ci
-      - run: npm run build
+      - run: cd Frontend && npm ci
+      - run: cd Frontend && npm run build
