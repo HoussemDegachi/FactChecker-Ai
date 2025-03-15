@@ -10,7 +10,7 @@ const FactCard = ({TrueFact=true}) => {
       </p>
       <center>
       <div className={'bg-white w-[330px] h-[140px] mt-1 p-[5px] rounded-[10px] flex flex-col'}>
-        <TimeStamp ClassNames={`flex-start z-10 ${TrueFact ? 'bg-green-400' : 'bg-red-400'} rounded-[40%] mx-3`} text={'Correct'}/>
+        <TimeStamp ClassNames={`flex-start z-10 ${TrueFact ? 'bg-green-400' : 'bg-red-400'} rounded-[40%] mx-3`} text={`${TrueFact ? 'Correct' : 'Wrong'}`}/>
         <p className={'font-base text-[12px] w-full flex-start p-4'}>
           The European Union updated its Renewable Energy
           Directive (RED III) In 2023, setting a binding target of

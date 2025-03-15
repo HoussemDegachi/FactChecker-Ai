@@ -1,3 +1,4 @@
+console.log("🚀 Content script loaded!");
 import { Storage } from "@plasmohq/storage";
 import FetchVideoData from "~Utils/FetchVideoData"
 
@@ -9,6 +10,8 @@ const detectVideoPlay = () => {
   if (!videoPlayer) {
     console.warn("No video player found.");
     return;
+  }else {
+    console.log("🎬 Video player found!");
   }
 
   videoPlayer.addEventListener("play", async () => {
@@ -24,6 +27,7 @@ const detectVideoPlay = () => {
 
       // Send a message to the background script to trigger the popup
       chrome.runtime.sendMessage({ action: "openPopup" });
+      alert("🚀 Popup triggered!");
     }
   });
 };

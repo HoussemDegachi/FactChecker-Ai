@@ -2,6 +2,7 @@ import "style.css"
 import FactCard from "~Component/FactCard"
 import Header from "~Sections/Header"
 import GetCurrentTabUrl from "~Utils/GetCurrentTabUrl"
+import Footer from "~Sections/Footer"
 
 function IndexPopup() {
   const CurrentUrl = GetCurrentTabUrl();
@@ -15,6 +16,7 @@ function IndexPopup() {
       <Header />
       <div className={"absolute top-[60px] overflow-y-auto max-h-[540px] "}>
         <FactCard TrueFact={true} />
+        <FactCard TrueFact={false} />
       </div>
     </div>
   )
