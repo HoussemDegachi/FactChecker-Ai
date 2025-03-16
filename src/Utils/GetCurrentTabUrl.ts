@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 const GetCurrentTabUrl = () => {
-  const [CurrentUrl, setCurrentUrl] = useState<string>('');
+  const [CurrentUrl, setCurrentUrl] = useState<string>("")
 
   const getCurrentTabUrl = async () => {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    setCurrentUrl(tab.url);
-  };
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    setCurrentUrl(tab.url)
+  }
 
   useEffect(() => {
-    getCurrentTabUrl();
-  }, []);
+    getCurrentTabUrl()
+  }, [])
 
   useEffect(() => {
-    console.log(CurrentUrl);
-  }, [CurrentUrl]);
+    console.log(CurrentUrl)
+  }, [CurrentUrl])
 
-  return CurrentUrl;
-};
+  return CurrentUrl
+}
 
-export default GetCurrentTabUrl;
+export default GetCurrentTabUrl

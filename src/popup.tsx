@@ -1,11 +1,12 @@
 import "style.css"
+
 import FactCard from "~Component/FactCard"
+import Footer from "~Sections/Footer"
 import Header from "~Sections/Header"
 import GetCurrentTabUrl from "~Utils/GetCurrentTabUrl"
-import Footer from "~Sections/Footer"
 
 function IndexPopup() {
-  const CurrentUrl = GetCurrentTabUrl();
+  const CurrentUrl = GetCurrentTabUrl()
 
   return (
     <div
