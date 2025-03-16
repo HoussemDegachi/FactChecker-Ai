@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const ContentScript = () => {
   useEffect(() => {
@@ -7,6 +7,7 @@ const ContentScript = () => {
     let hasStarted = false // Track if video has started
     let observer: MutationObserver | null = null
     let retryTimeout: NodeJS.Timeout | null = null
+
 
     // Function to detect YouTube video
     const detectVideo = () => {

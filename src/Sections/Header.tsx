@@ -1,6 +1,6 @@
 import React from "react"
 
-const Header = () => {
+const Header = ({isAnalyzing}) => {
   return (
     <nav
       className={
@@ -11,7 +11,7 @@ const Header = () => {
         <h3 className={"text-white font-bold"}>FactChecker</h3>
       </div>
       <div className={"flex items-center justify-between w-[25%]"}>
-        <div className={"w-[10px] h-[10px] bg-[#10B981] rounded-full"}></div>
+        <div className={`w-[10px] h-[10px] bg-[#10B981] rounded-full ${isAnalyzing ? 'animate-pulse' : ''}`}></div>
         <h3 className={"text-white font-semibold"}>Analyzing</h3>
       </div>
     </nav>
