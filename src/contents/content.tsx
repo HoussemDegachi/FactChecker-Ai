@@ -1,36 +1,60 @@
-console.log("🚀 Content script loaded!");
-import { Storage } from "@plasmohq/storage";
-import FetchVideoData from "~Utils/FetchVideoData"
+import { useEffect } from "react";
 
-const storage = new Storage();
+const ContentScript = () => {
+  useEffect(() => {
+    console.log("✅ Plasmo Content Script Loaded!");
 
-const detectVideoPlay = () => {
-  const videoPlayer = document.querySelector("video");
+    let hasStarted = false; // Track if video has started
+    let observer: MutationObserver | null = null;
+    let retryTimeout: NodeJS.Timeout | null = null;
 
-  if (!videoPlayer) {
-    console.warn("No video player found.");
-    return;
-  }else {
-    console.log("🎬 Video player found!");
-  }
+    // Function to detect YouTube video
+    const detectVideo = () => {
+      const video = document.querySelector("video");
 
-  videoPlayer.addEventListener("play", async () => {
-    console.log("🎬 Video started playing!");
+      if (video) {
+        console.log("🎥 Video detected!");
 
-    const videoUrl = window.location.href;
+        // Prevent multiple event listener bindings
+        if (!video.dataset.listenerAdded) {
+          video.dataset.listenerAdded = "true"; // Mark that the listener is set
 
-    // Fetch processed data from the backend
-    const videoData = await FetchVideoData(videoUrl);
+          video.addEventListener("playing", () => { // Using playing event to detect video start instead Of Play event.
+            if (!hasStarted) {
+              hasStarted = true;
+              alert("🚀 Video started playing for the FIRST TIME!");
+              // Perform API request here (e.g., send the video URL)
+            }
+          });
 
-    if (videoData) {
-      await storage.set("video-info", videoData);
+          video.addEventListener("loadeddata", () => {
+            hasStarted = false;
+          });
+        }
+      } else {
+        console.log("⚠️ No video found, retrying...");
+        retryTimeout = setTimeout(detectVideo, 1000); // Retry after 1 second
+      }
+    };
 
-      // Send a message to the background script to trigger the popup
-      chrome.runtime.sendMessage({ action: "openPopup" });
-      alert("🚀 Popup triggered!");
-    }
-  });
+    // Run detection when the extension loads
+    detectVideo();
+
+    // Watch for YouTube’s dynamic content changes
+    observer = new MutationObserver(() => {
+      detectVideo();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Cleanup function
+    return () => {
+      if (observer) observer.disconnect();
+      if (retryTimeout) clearTimeout(retryTimeout);
+    };
+  }, []);
+
+  return null; // Content script does not render anything in the UI
 };
 
-// Run detection when the page loads
-detectVideoPlay();
+export default ContentScript;
