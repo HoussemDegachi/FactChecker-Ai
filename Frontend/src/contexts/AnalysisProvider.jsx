@@ -19,7 +19,7 @@ export function AnalysisProvider({ children }) {
     const [analysisError, setAnalysisError] = useState(null)
 
   return (
-    <AnalysisContext.Provider value={{analysis, setAnalysis, loadingAnalysis, setLoadingAnalysis}}>
+    <AnalysisContext.Provider value={{analysis, setAnalysis, loadingAnalysis, setLoadingAnalysis, analysisError, setAnalysisError}}>
       {children}
     </AnalysisContext.Provider>
   )

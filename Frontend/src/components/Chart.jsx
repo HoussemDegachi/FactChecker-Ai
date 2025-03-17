@@ -1,28 +1,15 @@
-import React from 'react'
-
-import useAnalysisStore from '../store/analysis'
-
-
-const Chart = () => {
-    const { analysis, isLoading, error } = useAnalysisStore();
-
-    if (isLoading) return <p>Loading chart...</p>;
-    if (error) return <p>Error: {error}</p>;
-    if (!analysis || !analysis.topics) return <p>No topics available.</p>;
-
-    const { categories } = analysis.topics;
-    const maxCount = topics.count
+const Chart = ({ analysis }) => {
 
         return (
             <div className="chart-section">
                 <h3>Claims by Category</h3>
                 <div className="bar-chart">
-                {categories.map((topic, index) => (
+                {analysis.topics.categories.map((topic, index) => (
                     <div
                         key={topic._id}
                         className="bar"
                         style={{
-                            height: `${(topic.count / maxCount) * 100}%`,
+                            height: `${(topic.count / 100) * 100}%`,
                             background: `linear-gradient(to top, var(--chart-${index + 1}), var(--chart-5))`
                         }}
                     >
@@ -31,7 +18,7 @@ const Chart = () => {
                     </div>
                 ))}
                 </div>
-                {/* <div className="bar-chart">
+                <div className="bar-chart">
                     <div 
                         className="bar" 
                         style={{ height: "80%", background: "linear-gradient(to top, var(--chart-1), var(--chart-5))" }}
@@ -60,7 +47,7 @@ const Chart = () => {
                         <div className="bar-value">4</div>
                         <div className="bar-label">Policy</div>
                     </div>
-                </div> */}
+                </div>
             </div>
         );
 };
