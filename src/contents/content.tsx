@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import extractVideoId from "~Utils/ExtractVideoId"
 
 const ContentScript = () => {
   useEffect(() => {
@@ -14,7 +15,15 @@ const ContentScript = () => {
       const video = document.querySelector("video")
 
       if (video) {
-        console.log("🎥 Video detected!")
+        console.log("🎥 Video detected!");
+
+        const videoId = extractVideoId(window.location.href); // Extracted from URL
+        const videoThumbnail = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; // Thumbnail URL
+
+
+
+
+
 
         // Prevent multiple event listener bindings
         if (!video.dataset.listenerAdded) {
