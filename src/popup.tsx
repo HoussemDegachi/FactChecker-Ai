@@ -46,8 +46,13 @@ function IndexPopup() {
             className={
               "absolute top-[60px] overflow-y-auto max-h-[540px] flex flex-col "
             }>
-            <FactCard TrueFact={true} />
-            <FactCard TrueFact={false} />
+            {data.videoAnalysis.data.timestamps.map((item) => (
+              <FactCard
+                TrueFact={item.validation.isValid}
+                key={item._id}
+                data={item}
+              />
+            ))}
             <button
               className={"bg-green-500 rounded-xl px-2 py-1 text-white"}
               type={"button"}
