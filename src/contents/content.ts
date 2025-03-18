@@ -2,8 +2,11 @@ import { getVideoAnalysis } from "~utils/getYtVideo";
 
 export {}
 
+let lastUrl = window.location.href
 
 const checkYouTube = async () => {
+  console.log("lastUrl", lastUrl)
+  console.log("url:", window.location.href)
   if (window.location.hostname === "www.youtube.com" && window.location.pathname === "/watch") {
     const videoAnalysis = await getVideoAnalysis(window.location.href)
     console.log(videoAnalysis)
@@ -12,15 +15,14 @@ const checkYouTube = async () => {
   } else {
     chrome.runtime.sendMessage({ type: "UPDATE_UI", data: {isYtVideo: false}});
   }
+
 }
 
-checkYouTube()
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "fetchData") {
+    console.log("Recieved request to update based on tab")
+    checkYouTube()
+  }
+})
 
-// Observe URL changes (YouTube uses client-side navigation)
-const observer = new MutationObserver(async function () {
-    checkYouTube();
-});
-
-observer.observe(document.body, { childList: true, subtree: true });
-
-window.addEventListener("beforeunload", () => observer.disconnect());
+checkYouTube() // initial

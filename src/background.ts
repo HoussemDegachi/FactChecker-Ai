@@ -30,3 +30,18 @@ chrome.runtime.onConnect.addListener((port) => {
     port.onMessage.addListener(listener);
   }
 });
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.url && tab.active) {
+    // Notify content script when the URL changes
+    chrome.tabs.sendMessage(tabId, { action: "fetchData" }).catch(() => {})
+  }
+})
+
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  chrome.tabs.get(activeInfo.tabId, (tab) => {
+    if (tab?.url?.includes("youtube.com")) {
+      chrome.tabs.sendMessage(tab.id!, { action: "fetchData" }).catch(() => {})
+    }
+  })
+})

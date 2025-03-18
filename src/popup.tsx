@@ -9,7 +9,6 @@ function IndexPopup() {
   const [data, setData] = useState(null)
   const CurrentUrl = window.location.href
 
-
   // Listen for messages from content script
   useEffect(() => {
     const port = chrome.runtime.connect({ name: "popup" })
