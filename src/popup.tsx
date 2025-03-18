@@ -5,6 +5,7 @@ import Header from "~Sections/Header"
 import GetCurrentTabUrl from "~Utils/GetCurrentTabUrl"
 import { useEffect, useState } from "react"
 import { storage } from "~Utils/GlobalStorage"
+import ExtractVideoId from "~Utils/ExtractVideoId"
 
 function IndexPopup() {
   const CurrentUrl = GetCurrentTabUrl();
@@ -30,6 +31,7 @@ function IndexPopup() {
         const data = await storage.get("videoData");
         console.log("📥 Retrieved from storage:", data);
         setVideoData(data);
+        // console.log(data.originalId);
       };
       getVideoData();
       const unsubscribe = WatchForDataChanges();
@@ -50,14 +52,18 @@ function IndexPopup() {
   return (
     <div
       className={
-        "w-[400px] h-[600px] flex flex-col" +
-        "items-center justify-center overflow-y-auto flex-grow"
+        "w-[400px] h-[600px] flex flex-row PopupContainer" +
+        "items-center justify-center overflow-y-auto flex-grow rounded-xl bg-transparent"
       }>
       <Header isAnalyzing={isAnalyzing} />
-      <div className={"absolute top-[60px] overflow-y-auto max-h-[540px] "}>
+      <div className={"absolute top-[60px] overflow-y-auto max-h-[540px] flex flex-col "}>
         <FactCard TrueFact={true} />
         <FactCard TrueFact={false} />
+        <button className={'bg-green-500 rounded-xl px-2 py-1 text-white'} type={"button"} onClick={() => { chrome.tabs.create({ url:`https://missinformation-detector-1.vercel.app/analysis/${ExtractVideoId(CurrentUrl)}` });
+        }}>Detailed Report
+        </button>
       </div>
+
     </div>
   )
 }
