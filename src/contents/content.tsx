@@ -26,6 +26,7 @@ const ContentScript = () => {
               hasStarted = true
               alert("🚀 Video started playing for the FIRST TIME!")
 
+
               // Send message and handle response
               chrome.runtime.sendMessage(
                 { type: "VIDEO_STARTED", url: window.location.href },
@@ -37,6 +38,7 @@ const ContentScript = () => {
                     )
                   } else {
                     console.log("✅ Response from background:", response)
+
                   }
                 }
               )

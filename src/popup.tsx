@@ -10,6 +10,7 @@ import ExtractVideoId from "~Utils/ExtractVideoId"
 function IndexPopup() {
   const CurrentUrl = GetCurrentTabUrl();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [IsLoading, setIsLoading] = useState(false)
 
   // Getting video data from storage
   const [videoData, setVideoData] = useState(null);
@@ -49,6 +50,19 @@ function IndexPopup() {
     console.log("📊 Current videoData state:", videoData);
   }, [videoData]);
 
+
+  useEffect(() => {
+    // Watch for changes in "isLoading"
+    storage.watch({
+      "isLoading":
+      (newValue) => {
+        console.log("Loading state updated:", newValue)
+        setIsLoading(newValue.newValue);
+        setIsAnalyzing(newValue.newValue);
+      }
+    })
+  }, [])
+
   return (
     <div
       className={
@@ -57,7 +71,7 @@ function IndexPopup() {
       }>
       <Header isAnalyzing={isAnalyzing} />
       <div className={"absolute top-[60px] overflow-y-auto max-h-[540px] flex flex-col "}>
-        <FactCard TrueFact={true} />
+        <FactCard TrueFact={true}  />
         <FactCard TrueFact={false} />
         <button className={'bg-green-500 rounded-xl px-2 py-1 text-white'} type={"button"} onClick={() => { chrome.tabs.create({ url:`https://missinformation-detector-1.vercel.app/analysis/${ExtractVideoId(CurrentUrl)}` });
         }}>Detailed Report
