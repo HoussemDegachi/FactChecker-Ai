@@ -53,7 +53,7 @@ function IndexPopup() {
               type={"button"}
               onClick={() => {
                 chrome.tabs.create({
-                  url: `https://missinformation-detector-1.vercel.app/analysis/${encodeURIComponent(CurrentUrl)}`
+                  url: `https://missinformation-detector-1.vercel.app/analysis/${data.videoAnalysis.data.originalId}`
                 })
               }}>
               Detailed Report
