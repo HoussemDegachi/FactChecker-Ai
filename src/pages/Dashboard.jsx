@@ -5,6 +5,8 @@ import Chart from "../components/Chart";
 import { useAnalysis } from "../contexts/AnalysisProvider";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import KeySection from "../components/KeySection";
+import References from "../components/References";
 
 const Dashboard = () => {
   const {
@@ -42,6 +44,8 @@ const Dashboard = () => {
         <>
           <Overview analysis={analysis} />
           <Chart analysis={analysis} />
+          <KeySection analysis={analysis} />
+          <References analysis={analysis} />
         </>
       ) : (
         <p>Error</p>
