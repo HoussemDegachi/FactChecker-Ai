@@ -34,7 +34,8 @@
       "https://*/*"
     ],
     "permissions": [
-      "tabs"
+      "tabs",
+      "unlimitedStorage"
     ]
   },
   "peerDependencies": {
