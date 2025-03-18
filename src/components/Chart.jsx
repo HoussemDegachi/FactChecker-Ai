@@ -9,7 +9,7 @@ const Chart = ({ analysis }) => {
                         key={topic._id}
                         className="bar"
                         style={{
-                            height: `${(topic.count / 100) * 100}%`,
+                            height: `${(topic.count /25) * 100}%`,
                             background: `linear-gradient(to top, var(--chart-${index + 1}), var(--chart-5))`
                         }}
                     >
