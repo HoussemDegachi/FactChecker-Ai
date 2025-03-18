@@ -4,6 +4,7 @@ import FactCard from "~Component/FactCard"
 import Header from "~Sections/Header"
 
 import "./style.css"
+import LoadingSquares from "~Component/LoadingSquares"
 
 function IndexPopup() {
   const [data, setData] = useState(null)
@@ -36,7 +37,7 @@ function IndexPopup() {
         "items-center justify-center overflow-y-auto flex-grow"
       }>
       {!data ? (
-        "Loading"
+        <LoadingSquares />
       ) : !data.isYtVideo ? (
         "Not a youtube video"
       ) : (
