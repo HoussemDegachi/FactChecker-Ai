@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import FactCard from "~Component/FactCard"
 import Header from "~Sections/Header"
@@ -17,6 +19,8 @@ function IndexPopup() {
     port.onMessage.addListener((msg) => {
       if (msg.type === "UPDATE_UI") {
         setData(msg.data)
+        // Show toast when data updates
+        toast.info("Data updated")
       }
     })
 
@@ -36,6 +40,9 @@ function IndexPopup() {
         "w-[400px] h-[600px] flex flex-col" +
         "items-center justify-center overflow-y-auto flex-grow"
       }>
+      {/* ToastContainer must be included in your component tree */}
+      <ToastContainer position="bottom-right" />
+      
       {!data ? (
         <LoadingSquares />
       ) : !data.isYtVideo ? (
