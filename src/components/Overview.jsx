@@ -1,5 +1,4 @@
 
-
 const Overview = ({ analysis }) => {
 
   return (
@@ -26,7 +25,6 @@ const Overview = ({ analysis }) => {
             <div className="summary-grid">
                     <div className="stat-card">
                         <span className="stat-label">Total Claims Analyzed</span>
-                        {/* {analysis.timestamps.length} */}
                         <span className="stat-value">{analysis.topics.count}</span> 
                     </div>
                     <div className="stat-card">

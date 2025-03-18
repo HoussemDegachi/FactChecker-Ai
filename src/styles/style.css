@@ -1040,3 +1040,31 @@ footer {
     border-top: 1px solid var(--border);
     margin-top: 2rem;
 }
+
+.tag-red {
+    background-color: #FEE2E2;
+    color: red;
+}
+  
+.tag-yellow {
+    background-color: #f3b64b61;
+    color: #d58c10;
+}
+  
+.tag-green {
+    background-color: #D1FAE5;
+    color: green;
+}
+
+.border-red {
+    border-left: 4px solid red;
+}
+  
+.border-yellow {
+    border-left: 4px solid #F59E0B;
+}
+  
+.border-green {
+    border-left: 4px solid green;
+}
+  
