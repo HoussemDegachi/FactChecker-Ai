@@ -38,11 +38,6 @@ function IndexPopup() {
     return () => port.disconnect()
   }, [])
 
-  useEffect(() => {
-    console.log("YOUR DATA IN POPUP")
-    console.log(data)
-  }, [data])
-
   return (
     <div
       className={
@@ -54,7 +49,7 @@ function IndexPopup() {
         <LoadingSquares />
       ) : !data.isYtVideo ? (
         "Not a youtube video"
-      ) : (
+      ) : data.isYtVideo === "error"? "An error occured" : (
         <>
           <Header isAnalyzing={true} />
           <div

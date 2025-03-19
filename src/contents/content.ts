@@ -81,14 +81,24 @@ const checkYouTube = async () => {
       type: "UPDATE_UI",
       data: { isYtVideo: null }
     })
-    const videoAnalysis = await getVideoAnalysis(window.location.href)
-    console.log(videoAnalysis)
-    console.log("passing")
-    showNotification("Analysis complete!", "success")
-    chrome.runtime.sendMessage({
-      type: "UPDATE_UI",
-      data: { isYtVideo: true, videoAnalysis }
-    })
+
+    try {
+      const videoAnalysis = await getVideoAnalysis(window.location.href)
+      console.log(videoAnalysis)
+      console.log("passing")
+      showNotification("Analysis complete!", "success")
+      chrome.runtime.sendMessage({
+        type: "UPDATE_UI",
+        data: { isYtVideo: true, videoAnalysis }
+      })
+    } catch (e) {
+      console.log("An error occured")
+      chrome.runtime.sendMessage({
+        type: "UPDATE_UI",
+        data: { isYtVideo: "error", videoAnalysis: e.response }
+      })
+    }
+
   } else {
     chrome.runtime.sendMessage({
       type: "UPDATE_UI",

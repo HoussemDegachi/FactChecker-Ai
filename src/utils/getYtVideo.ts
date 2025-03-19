@@ -7,6 +7,7 @@ export const getVideoAnalysis = async (videoUrl: string) => {
         `https://missinformation-detector-b-production.up.railway.app/analysis/${encodeURIComponent(videoUrl)}`
       );
     } catch (error) {
-      console.log(error);
+      console.log("An error occured here", error);
+      throw error
     }
   }
