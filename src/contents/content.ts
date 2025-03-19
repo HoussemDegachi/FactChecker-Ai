@@ -71,14 +71,24 @@ const displayTimelineBubbles = (data) => {
   const timebar = document.querySelector(".ytp-progress-bar")
   const videoLength = document.querySelector("video").duration
 
-  const newBubble = document.createElement("span")
-  newBubble.style.borderRadius = "50%"
-  newBubble.style.minHeight = "20px"
-  newBubble.style.minWidth = "20px"
-  newBubble.style.backgroundColor = "green"
+  console.log(data)
+  for (let item of data.data.timestamps) {
+    if (!item.timestampInS)
+      continue
 
-  timebar.append(newBubble)
-  console.log(newBubble)
+    const newBubble = document.createElement("span")
+    newBubble.style.borderRadius = "50%"
+    newBubble.style.minHeight = "10px"
+    newBubble.style.minWidth = "10px"
+    newBubble.style.backgroundColor = "green"
+    newBubble.style.position = "absolute"
+    newBubble.style.top = "-50%"
+    newBubble.style.zIndex = "100"
+    newBubble.style.left = `${item.timestampInS * 100 / videoLength}%`
+    
+    timebar.append(newBubble)
+    console.log(newBubble)
+  }
 }
 
 const displayWindowData = (data, isError=false) => {
