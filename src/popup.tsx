@@ -10,6 +10,14 @@ import AnimatedButton from "~Component/Button";
 
 function IndexPopup() {
   const [data, setData] = useState(null);
+
+    const openIndepthAnalysisPage = () => {
+      chrome.storage.local.set({ videoAnalysisData: data.videoAnalysis.data }, () => {
+        const url = chrome.runtime.getURL(`tabs/IndepthAnalysis.html`);
+        chrome.tabs.create({ url });
+      });
+    };
+  
   // Listen for messages from content script
   useEffect(() => {
     const port = chrome.runtime.connect({ name: "popup" });
@@ -64,11 +72,9 @@ function IndexPopup() {
             ))}
 
             <AnimatedButton
-              onClick={() => {
-                chrome.tabs.create({
-                  url: `https://missinformation-detector-1.vercel.app/analysis/${data.videoAnalysis.data.originalId}`,
-                });
-              }}
+              onClick={
+                openIndepthAnalysisPage
+              }
             />
           </div>
         </>

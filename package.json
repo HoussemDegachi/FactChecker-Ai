@@ -12,6 +12,7 @@
   "dependencies": {
     "@plasmohq/storage": "^1.15.0",
     "axios": "^1.8.3",
+    "framer-motion": "^12.5.0",
     "lucide-react": "^0.483.0",
     "plasmo": "0.90.3",
     "react": "18.2.0",
@@ -43,7 +44,8 @@
   },
   "options": {
     "entries": {
-      "popup": "src/popup.tsx"
+      "popup": "src/popup.tsx",
+      "IndepthAnalysis": "src/tabs/IndepthAnalysis.tsx"
     }
   }
 }

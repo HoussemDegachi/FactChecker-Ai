@@ -106,7 +106,7 @@ const enableWarningOnError = (data) => {
     const videoTime = Math.trunc(document.querySelector("video").currentTime)
     console.log(videoTime)
     for (let item of data.data.timestamps) {
-      if (videoTime === item.timestampInS) {
+      if (videoTime === item.timestampInS && item.label !== "Correct") {
         showNotification(`${item.label} information detected`, "error")
       }
     }
@@ -153,7 +153,7 @@ const checkYouTube = async () => {
       const videoAnalysis = await getVideoAnalysis(window.location.href)
       console.log(videoAnalysis)
       console.log("passing")
-      showNotification("Analysis complete!", "success")
+      showNotification("Analysis completed!", "success")
       displayWindowData(videoAnalysis)
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
