@@ -45,7 +45,7 @@ function IndexPopup() {
     <div
       className={
         "w-[400px] h-[600px] flex flex-col" +
-        "items-center justify-center overflow-y-auto flex-grow"
+        "items-center justify-center overflow-y-auto flex-grow "
       }>
       
       {!data || data.isYtVideo === null ? (
@@ -57,7 +57,7 @@ function IndexPopup() {
           <Header isAnalyzing={true} />
           <div
             className={
-              "absolute top-[60px] overflow-y-auto max-h-[540px] flex flex-col "
+              "absolute top-[60px] overflow-y-auto max-h-[540px] flex flex-col scroll-auto mt-1 w-full "
             }>
             {data.videoAnalysis.data.timestamps.map((item) => (
               <FactCard
