@@ -66,16 +66,19 @@ function IndexPopup() {
                 data={item}
               />
             ))}
-            <button
-              className={"bg-green-500 rounded-xl px-2 py-1 text-white"}
-              type={"button"}
-              onClick={() => {
-                chrome.tabs.create({
-                  url: `https://missinformation-detector-1.vercel.app/analysis/${data.videoAnalysis.data.originalId}`
-                })
-              }}>
-              Detailed Report
-            </button>
+            <center>
+              <button style={{boxShadow: "0 0 15px #02FFDD"}}
+                className={"bg-gradient-to-r from-[#02FFDD] to-[#00BCFF] w-full rounded-xl px-2 py-1 " +
+                  "text-black font-semibold text-2xl mb-3 mt-3"} //fixed bottom-10 left-1/2 -translate-x-1/2 text-2xl
+                type={"button"}
+                onClick={() => {
+                  chrome.tabs.create({
+                    url: `https://missinformation-detector-1.vercel.app/analysis/${data.videoAnalysis.data.originalId}`
+                  })
+                }}>
+                Detailed Report
+              </button>
+            </center>
           </div>
         </>
       )}
