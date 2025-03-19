@@ -41,7 +41,7 @@ function NotYoutubeVideo() {
       </div>
 
       {/* Custom CSS for the eye animations */}
-      <style jsx>{`
+      <style>{`
         .eye {
           position: relative;
           width: 40px;
