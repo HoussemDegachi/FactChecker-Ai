@@ -1,7 +1,7 @@
 // WaveButton.jsx
 import React, { useEffect, useRef } from "react";
 
-const AnimatedButton = ({ onClick }) => {
+const AnimatedButton = ({ onClick ,text='Detailed Report' }) => {
   const textRef = useRef(null);
 
   const handleClick = () => {
@@ -52,11 +52,13 @@ const AnimatedButton = ({ onClick }) => {
   return (
     <div className="w-full px-6 flex justify-center">
       <button
-        className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 
-          w-4/5 rounded-full px-6 py-3.5 text-white font-bold text-lg mb-5 mt-3
-          shadow-lg transition-all duration-300 group
-          focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-80"
+        className={"relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 " +
+          "w-4/5 rounded-full px-6 py-3.5 text-white font-bold text-lg mb-5 mt-3" +
+          "shadow-lg transition-all duration-300 group" +
+          "focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-80"}
         type="button"
+        style={text === "Go to YouTube" ? { fontSize: "larger", marginTop: "10px",overflowWrap: "normal",
+          wordWrap: "normal",  wordBreak: "keep-all" } : {'fontSize': 'large'}}
         onClick={handleClick}
       >
         <span
@@ -66,7 +68,7 @@ const AnimatedButton = ({ onClick }) => {
 
         <div className="relative z-10 flex items-center justify-center">
           <span ref={textRef} className="mr-2 tracking-wide">
-            Detailed Report
+            {text}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

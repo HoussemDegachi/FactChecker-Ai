@@ -1,4 +1,5 @@
 import React from 'react';
+import AnimatedButton from "~Component/Button"
 
 function NotYoutubeVideo() {
   return (
@@ -39,6 +40,7 @@ function NotYoutubeVideo() {
         <p className="text-gray-300 text-center max-w-xs">
           This extension only works on YouTube video pages. Navigate to a YouTube video to analyze facts.
         </p>
+        <AnimatedButton text="Go to YouTube" onClick={() => window.open("https://youtube.com")} />
       </div>
 
       {/* Custom CSS for the eye animations */}
