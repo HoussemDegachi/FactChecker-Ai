@@ -16,10 +16,19 @@ toast("Content script loaded", {
   draggable: true
 })
 
+const ColorsSet ={
+  info: "#4F46E5",
+  misleading: "#c9c302",
+  correct: "#10B981",
+  success: "#10B981",
+  wrong: "#EF4444",
+  error: "#EF4444",
+}
+
 // Simple notification function for content script
 const showNotification = (
   message: string,
-  type: "info" | "success" | "error" = "info"
+  type: "info" | "success" | "error" | "misleading" = "info"
 ) => {
   const notificationId = "info-checker-notification"
 
@@ -49,13 +58,16 @@ const showNotification = (
   // Set color based on type
   switch (type) {
     case "success":
-      notification.style.backgroundColor = "#10B981"
+      notification.style.backgroundColor = ColorsSet.success;
       break
     case "error":
-      notification.style.backgroundColor = "#EF4444"
+      notification.style.backgroundColor = ColorsSet.error;
+      break
+    case "misleading":
+      notification.style.backgroundColor = ColorsSet.misleading;
       break
     default:
-      notification.style.backgroundColor = "#4F46E5"
+      notification.style.backgroundColor = ColorsSet.info;
   }
 
   notification.textContent = message
@@ -81,7 +93,8 @@ const displayTimelineBubbles = (data) => {
     newBubble.style.borderRadius = "50%"
     newBubble.style.minHeight = "12px"
     newBubble.style.minWidth = "12px"
-    newBubble.style.backgroundColor = `${item.label === "Correct" ? "#10B981" : item.label === "Misleading" ? "#F59E0B" : "#7C3AED"}`
+    newBubble.style.transform = "translate(-30%,0)"; // Center the bubble and Making It More Accurate.
+    newBubble.style.backgroundColor = `${item.label === "Correct" ? ColorsSet.correct : item.label === "Misleading" ? ColorsSet.misleading : ColorsSet.wrong}`
     if (item.label != "Wrong") newBubble.style.opacity = "0.8"
     newBubble.style.position = "absolute"
     newBubble.style.top = "-3px"
@@ -106,8 +119,9 @@ const enableWarningOnError = (data) => {
     const videoTime = Math.trunc(document.querySelector("video").currentTime)
     console.log(videoTime)
     for (let item of data.data.timestamps) {
-      if (videoTime === item.timestampInS && item.label !== "Correct") {
-        showNotification(`${item.label} information detected`, "error")
+      if (videoTime === item.timestampInS) {
+        const NotificationType = item.label === "Correct" ? "success" : item.label === "Misleading" ? "misleading" : "error"; // Set notification type based on label
+        showNotification(`${item.label} information detected`, NotificationType);
       }
     }
   }, 1000)
