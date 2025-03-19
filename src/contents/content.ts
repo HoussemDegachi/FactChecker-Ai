@@ -73,22 +73,20 @@ const displayTimelineBubbles = (data) => {
 
   console.log(data)
   for (let item of data.data.timestamps) {
-    if (!item.timestampInS)
-      continue
+    if (!item.timestampInS) continue
 
     const newBubble = document.createElement("span")
     newBubble.classList.add("timeline-bubble")
     newBubble.style.borderRadius = "50%"
     newBubble.style.minHeight = "12px"
     newBubble.style.minWidth = "12px"
-    newBubble.style.backgroundColor = `${item.label === "Correct"? "#10B981" : item.label === "Misleading"? "#F59E0B" : "#7C3AED"}`
-    if (item.label != "Wrong")
-      newBubble.style.opacity = "0.8"
+    newBubble.style.backgroundColor = `${item.label === "Correct" ? "#10B981" : item.label === "Misleading" ? "#F59E0B" : "#7C3AED"}`
+    if (item.label != "Wrong") newBubble.style.opacity = "0.8"
     newBubble.style.position = "absolute"
     newBubble.style.top = "-3px"
     newBubble.style.zIndex = "100"
-    newBubble.style.left = `${item.timestampInS * 100 / videoLength}%`
-    
+    newBubble.style.left = `${(item.timestampInS * 100) / videoLength}%`
+
     timebar.append(newBubble)
   }
 }
@@ -100,14 +98,16 @@ const clearTimelineBubbles = () => {
   }
 }
 
-const displayWindowData = (data, isError=false) => {
+const displayWindowData = (data, isError = false) => {
   if (!isError) displayTimelineBubbles(data)
-  }
-
+}
 
 let lastUrl = window.location.href
+let requestSent = false
 
 const checkYouTube = async () => {
+  if (requestSent) return
+
   console.log("lastUrl", lastUrl)
   console.log("url:", window.location.href)
   clearTimelineBubbles()
@@ -134,23 +134,26 @@ const checkYouTube = async () => {
     } catch (e) {
       console.log("An error occured")
       displayWindowData(e, true)
+      showNotification("An error occured while trying to analyize video\nopen popup for more info", "error")
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
         data: { isYtVideo: "error", videoAnalysis: e.response }
       })
     }
-
   } else {
     chrome.runtime.sendMessage({
       type: "UPDATE_UI",
       data: { isYtVideo: false }
     })
   }
+
+  requestSent = true
 }
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "fetchData") {
     console.log("Received request to update based on tab")
+    requestSent = false
     checkYouTube()
   }
 })
