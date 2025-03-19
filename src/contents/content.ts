@@ -77,6 +77,7 @@ const displayTimelineBubbles = (data) => {
       continue
 
     const newBubble = document.createElement("span")
+    newBubble.classList.add("timeline-bubble")
     newBubble.style.borderRadius = "50%"
     newBubble.style.minHeight = "12px"
     newBubble.style.minWidth = "12px"
@@ -89,13 +90,19 @@ const displayTimelineBubbles = (data) => {
     newBubble.style.left = `${item.timestampInS * 100 / videoLength}%`
     
     timebar.append(newBubble)
-    console.log(newBubble)
+  }
+}
+
+const clearTimelineBubbles = () => {
+  const bubbles = document.querySelectorAll(".timeline-bubble")
+  for (let bubble of bubbles) {
+    bubble.remove()
   }
 }
 
 const displayWindowData = (data, isError=false) => {
   if (!isError) displayTimelineBubbles(data)
-}
+  }
 
 
 let lastUrl = window.location.href
@@ -103,6 +110,7 @@ let lastUrl = window.location.href
 const checkYouTube = async () => {
   console.log("lastUrl", lastUrl)
   console.log("url:", window.location.href)
+  clearTimelineBubbles()
   if (
     window.location.hostname === "www.youtube.com" &&
     window.location.pathname === "/watch"

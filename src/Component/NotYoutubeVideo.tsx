@@ -20,6 +20,7 @@ function NotYoutubeVideo() {
               <div className="eyelid"></div>
             </div>
             
+            
             {/* Right eye */}
             <div className="eye sad">
               <div className="pupil"></div>
@@ -41,7 +42,7 @@ function NotYoutubeVideo() {
       </div>
 
       {/* Custom CSS for the eye animations */}
-      <style jsx>{`
+      <style>{`
         .eye {
           position: relative;
           width: 40px;

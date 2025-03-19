@@ -45,7 +45,7 @@ function IndexPopup() {
     <div
       className={
         "w-[400px] h-[600px] flex flex-col" +
-        "items-center justify-center overflow-y-auto flex-grow "
+        "items-center justify-center flex-grow "
       }>
       
       {!data || data.isYtVideo === null ? (
@@ -57,7 +57,7 @@ function IndexPopup() {
           <Header isAnalyzing={true} />
           <div
             className={
-              "absolute top-[60px] overflow-y-auto max-h-[540px] flex flex-col scroll-auto mt-1 w-full "
+              "absolute top-[60px] max-h-[540px] flex flex-col mt-1 w-full pr-4 scroll-smooth overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full  [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full  [&::-webkit-scrollbar-thumb]:bg-gray-300  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
             }>
             {data.videoAnalysis.data.timestamps.map((item) => (
               <FactCard
