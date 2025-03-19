@@ -3,6 +3,8 @@ import { toast } from "react-toastify"
 
 import { getVideoAnalysis } from "~utils/getYtVideo"
 
+export {}
+
 console.log("Content script loaded")
 toast("Content script loaded", {
   position: "bottom-right",
@@ -65,7 +67,24 @@ const showNotification = (
   }, 5000)
 }
 
-export {}
+const displayTimelineBubbles = (data) => {
+  const timebar = document.querySelector(".ytp-progress-bar")
+  const videoLength = document.querySelector("video").duration
+
+  const newBubble = document.createElement("span")
+  newBubble.style.borderRadius = "50%"
+  newBubble.style.minHeight = "20px"
+  newBubble.style.minWidth = "20px"
+  newBubble.style.backgroundColor = "green"
+
+  timebar.append(newBubble)
+  console.log(newBubble)
+}
+
+const displayWindowData = (data, isError=false) => {
+  if (!isError) displayTimelineBubbles(data)
+}
+
 
 let lastUrl = window.location.href
 
@@ -87,12 +106,14 @@ const checkYouTube = async () => {
       console.log(videoAnalysis)
       console.log("passing")
       showNotification("Analysis complete!", "success")
+      displayWindowData(videoAnalysis)
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
         data: { isYtVideo: true, videoAnalysis }
       })
     } catch (e) {
       console.log("An error occured")
+      displayWindowData(e, true)
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
         data: { isYtVideo: "error", videoAnalysis: e.response }
