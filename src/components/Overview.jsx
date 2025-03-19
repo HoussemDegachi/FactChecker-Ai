@@ -5,7 +5,7 @@ const Overview = ({ analysis }) => {
     <>
     <div className="card fact-check-summary">
             <div className="tags">
-                <span classNameName="badge">{analysis.generalTopic}</span>
+                <span className="badge">{analysis.generalTopic}</span>
                 {analysis.percentages.falseInformation > 0 && (
                     <span className="badge" style={{ background: "var(--warning)" }}>
                         Critical Misinformation
@@ -14,8 +14,6 @@ const Overview = ({ analysis }) => {
                 <span className="badge" style={{ background: "var(--accent)" }}>
                     Verified Elements
                 </span>
-                {/* <span className="badge" style={{background: "var(--warning)"}}>Critical Misinformation</span> */}
-                {/* <span className="badge" style={{background: "var(--accent)"}}>Verified Elements</span> */}
             </div>
                 
             <div className="tabs">
