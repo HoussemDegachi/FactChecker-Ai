@@ -1,278 +1,361 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
-html, body, #root {
-  height: 100%;
-  border-radius: 12px;
-    /*overflow-x: hidden;*/
-    background-color: black;
+
+html,
+body,
+#root {
+	height: 100%;
+	border-radius: 12px;
+	/*overflow-x: hidden;
+    */
+	background-color: black;
 }
+
 body {
-  min-width: 300px;
-  max-height: 600px;
-  overflow-y: auto;
+	min-width: 300px;
+	max-height: 600px;
+	overflow-y: auto;
 }
+
 .new-tab {
-  background-color: #F0F0F0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  color: #333;
-  display: block;
-  font-size: 12px;
-  line-height: 16px;
-  margin: 0 0 10px;
-  padding: 10px;
-  position: relative;
-  text-decoration: none;
-  width: 100%;
+	background-color: #F0F0F0;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	color: #333;
+	display: block;
+	font-size: 12px;
+	line-height: 16px;
+	margin: 0 0 10px;
+	padding: 10px;
+	position: relative;
+	text-decoration: none;
+	width: 100%;
 }
+
 ::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+	width: 0px;
+	height: 0px;
 }
+
 @keyframes pulseA {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	50% {
+		transform: scale(1.3);
+		opacity: 0.5;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
+
 /* UIverse.io by ZacharyCrespin Square Loader Animation */
 @keyframes square-animation {
- 0% {
-  left: 0;
-  top: 0;
- }
- 10.5% {
-  left: 0;
-  top: 0;
- }
- 12.5% {
-  left: 32px;
-  top: 0;
- }
- 23% {
-  left: 32px;
-  top: 0;
- }
- 25% {
-  left: 64px;
-  top: 0;
- }
- 35.5% {
-  left: 64px;
-  top: 0;
- }
- 37.5% {
-  left: 64px;
-  top: 32px;
- }
- 48% {
-  left: 64px;
-  top: 32px;
- }
- 50% {
-  left: 32px;
-  top: 32px;
- }
- 60.5% {
-  left: 32px;
-  top: 32px;
- }
- 62.5% {
-  left: 32px;
-  top: 64px;
- }
- 73% {
-  left: 32px;
-  top: 64px;
- }
- 75% {
-  left: 0;
-  top: 64px;
- }
- 85.5% {
-  left: 0;
-  top: 64px;
- }
- 87.5% {
-  left: 0;
-  top: 32px;
- }
- 98% {
-  left: 0;
-  top: 32px;
- }
- 100% {
-  left: 0;
-  top: 0;
- }
+	0% {
+		left: 0;
+		top: 0;
+	}
+
+	10.5% {
+		left: 0;
+		top: 0;
+	}
+
+	12.5% {
+		left: 32px;
+		top: 0;
+	}
+
+	23% {
+		left: 32px;
+		top: 0;
+	}
+
+	25% {
+		left: 64px;
+		top: 0;
+	}
+
+	35.5% {
+		left: 64px;
+		top: 0;
+	}
+
+	37.5% {
+		left: 64px;
+		top: 32px;
+	}
+
+	48% {
+		left: 64px;
+		top: 32px;
+	}
+
+	50% {
+		left: 32px;
+		top: 32px;
+	}
+
+	60.5% {
+		left: 32px;
+		top: 32px;
+	}
+
+	62.5% {
+		left: 32px;
+		top: 64px;
+	}
+
+	73% {
+		left: 32px;
+		top: 64px;
+	}
+
+	75% {
+		left: 0;
+		top: 64px;
+	}
+
+	85.5% {
+		left: 0;
+		top: 64px;
+	}
+
+	87.5% {
+		left: 0;
+		top: 32px;
+	}
+
+	98% {
+		left: 0;
+		top: 32px;
+	}
+
+	100% {
+		left: 0;
+		top: 0;
+	}
 }
+
 .loader {
- position: relative;
- width: 96px;
- height: 96px;
- transform: rotate(45deg);
+	position: relative;
+	width: 96px;
+	height: 96px;
+	transform: rotate(45deg);
 }
+
 .loader-square {
- position: absolute;
- top: 0;
- left: 0;
- width: 28px;
- height: 28px;
- margin: 2px;
- border-radius: 0px;
- background: white;
- background-size: cover;
- background-position: center;
- background-attachment: fixed;
- animation: square-animation 10s ease-in-out infinite both;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 28px;
+	height: 28px;
+	margin: 2px;
+	border-radius: 0px;
+	background: white;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	animation: square-animation 10s ease-in-out infinite both;
 }
+
 .loader-square:nth-of-type(0) {
- animation-delay: 0s;
+	animation-delay: 0s;
 }
+
 .loader-square:nth-of-type(1) {
- animation-delay: -1.4285714286s;
+	animation-delay: -1.4285714286s;
 }
+
 .loader-square:nth-of-type(2) {
- animation-delay: -2.8571428571s;
+	animation-delay: -2.8571428571s;
 }
+
 .loader-square:nth-of-type(3) {
- animation-delay: -4.2857142857s;
+	animation-delay: -4.2857142857s;
 }
+
 .loader-square:nth-of-type(4) {
- animation-delay: -5.7142857143s;
+	animation-delay: -5.7142857143s;
 }
+
 .loader-square:nth-of-type(5) {
- animation-delay: -7.1428571429s;
+	animation-delay: -7.1428571429s;
 }
+
 .loader-square:nth-of-type(6) {
- animation-delay: -8.5714285714s;
+	animation-delay: -8.5714285714s;
 }
+
 /* Loading text styles */
 .loading-text {
-  text-align: center;
-  width: 100%;
+	text-align: center;
+	width: 100%;
 }
 
 /* Add this to your style.css file */
-
 /* Rainbow color animation for the loader squares */
 @keyframes rainbow-color {
-  0% { background-color: #FF0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }  /* Red */
-  14% { background-color: #FF7F00; box-shadow: 0 0 10px rgba(255, 127, 0, 0.7); }  /* Orange */
-  28% { background-color: #FFFF00; box-shadow: 0 0 10px rgba(255, 255, 0, 0.7); }  /* Yellow */
-  42% { background-color: #00FF00; box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); }  /* Green */
-  56% { background-color: #00FFFF; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); }  /* Cyan */
-  70% { background-color: #0000FF; box-shadow: 0 0 10px rgba(0, 0, 255, 0.7); }  /* Blue */
-  84% { background-color: #8B00FF; box-shadow: 0 0 10px rgba(139, 0, 255, 0.7); }  /* Violet */
-  100% { background-color: #FF0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }  /* Back to red */
+	0% {
+		background-color: #FF0000;
+		box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+	}
+
+	/* Red */
+	14% {
+		background-color: #FF7F00;
+		box-shadow: 0 0 10px rgba(255, 127, 0, 0.7);
+	}
+
+	/* Orange */
+	28% {
+		background-color: #FFFF00;
+		box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+	}
+
+	/* Yellow */
+	42% {
+		background-color: #00FF00;
+		box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+	}
+
+	/* Green */
+	56% {
+		background-color: #00FFFF;
+		box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+	}
+
+	/* Cyan */
+	70% {
+		background-color: #0000FF;
+		box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+	}
+
+	/* Blue */
+	84% {
+		background-color: #8B00FF;
+		box-shadow: 0 0 10px rgba(139, 0, 255, 0.7);
+	}
+
+	/* Violet */
+	100% {
+		background-color: #FF0000;
+		box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+	}
+
+	/* Back to red */
 }
 
 /* Update the loader square style to include rainbow animation */
 .loader-square {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 28px;
-  height: 28px;
-  margin: 2px;
-  border-radius: 0px;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  animation: 
-    square-animation 10s ease-in-out infinite both,
-    rainbow-color 8s linear infinite;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 28px;
+	height: 28px;
+	margin: 2px;
+	border-radius: 0px;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	animation: square-animation 10s ease-in-out infinite both, rainbow-color 8s linear infinite;
 }
 
 /* Different color animation speeds for each square to create variety */
 .loader-square:nth-of-type(0) {
-  animation-delay: 0s, 0s;
+	animation-delay: 0s, 0s;
 }
+
 .loader-square:nth-of-type(1) {
-  animation-delay: -1.4285714286s, -1s;
+	animation-delay: -1.4285714286s, -1s;
 }
+
 .loader-square:nth-of-type(2) {
-  animation-delay: -2.8571428571s, -2s;
+	animation-delay: -2.8571428571s, -2s;
 }
+
 .loader-square:nth-of-type(3) {
-  animation-delay: -4.2857142857s, -3s;
+	animation-delay: -4.2857142857s, -3s;
 }
+
 .loader-square:nth-of-type(4) {
-  animation-delay: -5.7142857143s, -4s;
+	animation-delay: -5.7142857143s, -4s;
 }
+
 .loader-square:nth-of-type(5) {
-  animation-delay: -7.1428571429s, -5s;
+	animation-delay: -7.1428571429s, -5s;
 }
+
 .loader-square:nth-of-type(6) {
-  animation-delay: -8.5714285714s, -6s;
+	animation-delay: -8.5714285714s, -6s;
 }
+
 /* Wave text animation with changing colors */
 .wave-text {
-  font-size: 18px;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 8px;
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
+	font-size: 18px;
+	font-weight: 600;
+	color: #FFFFFF;
+	margin-bottom: 8px;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
 }
+
 /* Color changing animation for the wave gradient */
 @keyframes colorChange {
-  0% {
-    background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(59, 130, 246, 0.5) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  }
-  25% {
-    background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(52, 211, 153, 0.5) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  }
-  50% {
-    background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(167, 139, 250, 0.5) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  }
-  75% {
-    background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(251, 113, 133, 0.5) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  }
-  100% {
-    background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(59, 130, 246, 0.5) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  }
+	0% {
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(59, 130, 246, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+	}
+
+	25% {
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(52, 211, 153, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+	}
+
+	50% {
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(167, 139, 250, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+	}
+
+	75% {
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(251, 113, 133, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+	}
+
+	100% {
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(59, 130, 246, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+	}
 }
+
 .wave-text::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  animation:
-    wave 1.8s infinite ease-in-out,
-    colorChange 8s infinite linear;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	animation: wave 1.8s infinite ease-in-out, colorChange 8s infinite linear;
 }
+
 @keyframes wave {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
+	0% {
+		left: -100%;
+	}
+
+	100% {
+		left: 100%;
+	}
 }
+
 .subtitle {
-  font-size: 14px;
-  color: #A0A0A0;
+	font-size: 14px;
+	color: #A0A0A0;
 }
