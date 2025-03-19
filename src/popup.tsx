@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react"
-import { ToastContainer, toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 
 import FactCard from "~Component/FactCard"
 import Header from "~Sections/Header"
@@ -10,21 +8,32 @@ import LoadingSquares from "~Component/LoadingSquares"
 
 function IndexPopup() {
   const [data, setData] = useState(null)
-  const CurrentUrl = window.location.href
 
   // Listen for messages from content script
   useEffect(() => {
     const port = chrome.runtime.connect({ name: "popup" })
 
+    const createFetchingInterval = (delay) => {
+      return setInterval(() => {
+        port.postMessage({ type: "REQUEST_UPDATE" })
+      }, delay)
+    }
+
     port.onMessage.addListener((msg) => {
       if (msg.type === "UPDATE_UI") {
         setData(msg.data)
-        // Show toast when data updates
-        toast.info("Data updated")
       }
     })
 
-    port.postMessage({ type: "REQUEST_UPDATE" })
+    let fetchingUpdatesInterval
+    if (!data || data.isYtVideo === null && !fetchingUpdatesInterval) {
+      fetchingUpdatesInterval = createFetchingInterval(30)
+    } else if (!data || data.isYtVideo === null) {
+      clearInterval(fetchingUpdatesInterval)
+      fetchingUpdatesInterval = createFetchingInterval(400)
+    } else if (data && data.isYtVideo !== null && fetchingUpdatesInterval) {
+      clearInterval(fetchingUpdatesInterval)
+    }
 
     return () => port.disconnect()
   }, [])
@@ -40,10 +49,8 @@ function IndexPopup() {
         "w-[400px] h-[600px] flex flex-col" +
         "items-center justify-center overflow-y-auto flex-grow"
       }>
-      {/* ToastContainer must be included in your component tree */}
-      <ToastContainer position="bottom-right" />
       
-      {!data ? (
+      {!data || data.isYtVideo === null ? (
         <LoadingSquares />
       ) : !data.isYtVideo ? (
         "Not a youtube video"

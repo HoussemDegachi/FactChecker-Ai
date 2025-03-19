@@ -5,7 +5,7 @@
   "description": "FactAi",
   "author": "Algorithmic Avangers Team",
   "scripts": {
-    "dev": "plasmo dev",
+    "dev": "plasmo dev --verbose",
     "build": "plasmo build",
     "package": "plasmo package"
   },

@@ -1,6 +1,6 @@
 import React from "react"
 
-import TimeStamp from "~Component/TimeStamp"
+import TimeStamp from "./TimeStamp"
 
 const FactCard = ({ TrueFact, data }) => {
   return (

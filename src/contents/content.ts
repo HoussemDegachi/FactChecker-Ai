@@ -1,7 +1,7 @@
 import type { PlasmoCSConfig } from "plasmo"
+import { toast } from "react-toastify"
 
 import { getVideoAnalysis } from "~utils/getYtVideo"
-import { toast } from "react-toastify"
 
 console.log("Content script loaded")
 toast("Content script loaded", {
@@ -10,22 +10,25 @@ toast("Content script loaded", {
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
-  draggable: true,
+  draggable: true
 })
 
 // Simple notification function for content script
-const showNotification = (message: string, type: 'info' | 'success' | 'error' = 'info') => {
-  const notificationId = 'info-checker-notification';
-  
+const showNotification = (
+  message: string,
+  type: "info" | "success" | "error" = "info"
+) => {
+  const notificationId = "info-checker-notification"
+
   // Remove existing notification if any
-  const existingNotification = document.getElementById(notificationId);
+  const existingNotification = document.getElementById(notificationId)
   if (existingNotification) {
-    existingNotification.remove();
+    existingNotification.remove()
   }
-  
+
   // Create notification element
-  const notification = document.createElement('div');
-  notification.id = notificationId;
+  const notification = document.createElement("div")
+  notification.id = notificationId
   notification.style.cssText = `
     position: fixed;
     bottom: 20px;
@@ -38,28 +41,28 @@ const showNotification = (message: string, type: 'info' | 'success' | 'error' = 
     z-index: 99999;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-  `;
-  
+  `
+
   // Set color based on type
   switch (type) {
-    case 'success':
-      notification.style.backgroundColor = '#10B981';
-      break;
-    case 'error':
-      notification.style.backgroundColor = '#EF4444';
-      break;
+    case "success":
+      notification.style.backgroundColor = "#10B981"
+      break
+    case "error":
+      notification.style.backgroundColor = "#EF4444"
+      break
     default:
-      notification.style.backgroundColor = '#4F46E5';
+      notification.style.backgroundColor = "#4F46E5"
   }
-  
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  
+
+  notification.textContent = message
+  document.body.appendChild(notification)
+
   // Auto-remove after 5 seconds
   setTimeout(() => {
-    notification.style.opacity = '0';
-    setTimeout(() => notification.remove(), 300);
-  }, 5000);
+    notification.style.opacity = "0"
+    setTimeout(() => notification.remove(), 300)
+  }, 5000)
 }
 
 export {}
@@ -73,11 +76,15 @@ const checkYouTube = async () => {
     window.location.hostname === "www.youtube.com" &&
     window.location.pathname === "/watch"
   ) {
-    showNotification("Analyzing video for factual accuracy...", "info");
+    showNotification("Analyzing video for factual accuracy...", "info")
+    chrome.runtime.sendMessage({
+      type: "UPDATE_UI",
+      data: { isYtVideo: null }
+    })
     const videoAnalysis = await getVideoAnalysis(window.location.href)
     console.log(videoAnalysis)
     console.log("passing")
-    showNotification("Analysis complete!", "success");
+    showNotification("Analysis complete!", "success")
     chrome.runtime.sendMessage({
       type: "UPDATE_UI",
       data: { isYtVideo: true, videoAnalysis }
@@ -97,12 +104,6 @@ chrome.runtime.onMessage.addListener((message) => {
   }
 })
 
-checkYouTube() // initial
-
-export const config: PlasmoCSConfig = {
-  // matches: ["https://www.youtube.com/watch*"]
-}
-
 const createToastContainer = () => {
   const container = document.createElement("div")
   container.id = "plasmo-toast-container"
@@ -113,9 +114,9 @@ const createToastContainer = () => {
   // Add toastify styles
   const style = document.createElement("style")
   style.textContent = `
-    /* Minified CSS from react-toastify */
-    .Toastify__toast-container{position:fixed;z-index:9999;...}
-    /* ... rest of react-toastify CSS ... */
+  /* Minified CSS from react-toastify */
+  .Toastify__toast-container{position:fixed;z-index:9999;...}
+  /* ... rest of react-toastify CSS ... */
   `
   shadowRoot.appendChild(style)
 
@@ -160,4 +161,9 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 // Show initial notification
-showNotification("Info Checker extension activated", "info");
+if (
+  window.location.hostname === "www.youtube.com" &&
+  window.location.pathname === "/watch"
+)
+  showNotification("Info Checker extension activated", "info")
+checkYouTube() // initial

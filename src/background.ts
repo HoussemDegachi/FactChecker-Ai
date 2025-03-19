@@ -55,7 +55,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 chrome.tabs.onActivated.addListener((activeInfo) => {
   chrome.tabs.get(activeInfo.tabId, (tab) => {
-    if (tab?.url?.includes("youtube.com")) {
+    if (tab?.url?.includes("youtube.com/watch")) {
       chrome.tabs.sendMessage(tab.id!, { action: "fetchData" }).catch(() => {})
     }
   })
