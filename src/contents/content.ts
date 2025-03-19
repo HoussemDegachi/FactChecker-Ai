@@ -80,8 +80,7 @@ const displayTimelineBubbles = (data) => {
     newBubble.style.borderRadius = "50%"
     newBubble.style.minHeight = "12px"
     newBubble.style.minWidth = "12px"
-    newBubble.style.transform = "translate(-50%, 0)" // Center the bubble
-    newBubble.style.backgroundColor = `${item.label === "Correct"? "green" : item.label === "Misleading"? "yellow" : "#FF004F"}`
+    newBubble.style.backgroundColor = `${item.label === "Correct"? "#10B981" : item.label === "Misleading"? "#F59E0B" : "#7C3AED"}`
     if (item.label != "Wrong")
       newBubble.style.opacity = "0.8"
     newBubble.style.position = "absolute"
