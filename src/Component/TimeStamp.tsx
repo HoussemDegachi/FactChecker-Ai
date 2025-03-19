@@ -1,7 +1,6 @@
 import React from "react"
 
 const TimeStamp = ({ text, bgColor = "#E0F0E9", ClassNames = "" }) => {
-  console.log(bgColor)
   return (
     // <div className={`w-[65px] h-[27px] bg-[${bgColor}] rounded-[40%]` +
     //   `${ClassNames}`}>

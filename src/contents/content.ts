@@ -6,7 +6,6 @@ import { getVideoAnalysis } from "~utils/getYtVideo"
 
 export {}
 
-console.log("Content script loaded")
 toast("Content script loaded", {
   position: "bottom-right",
   autoClose: 5000,
@@ -84,7 +83,6 @@ const displayTimelineBubbles = (data) => {
   const timebar = document.querySelector(".ytp-progress-bar")
   const videoLength = document.querySelector("video").duration
 
-  console.log(data)
   for (let item of data.data.timestamps) {
     if (!item.timestampInS) continue
 
@@ -117,9 +115,8 @@ let warningInternval
 const enableWarningOnError = (data) => {
   warningInternval = setInterval(() => {
     const videoTime = Math.trunc(document.querySelector("video").currentTime)
-    console.log(videoTime)
     for (let item of data.data.timestamps) {
-      if (videoTime === item.timestampInS) {
+      if (videoTime === item.timestampInS && item.label !== "Correct") {
         const NotificationType = item.label === "Correct" ? "success" : item.label === "Misleading" ? "misleading" : "error"; // Set notification type based on label
         showNotification(`${item.label} information detected`, NotificationType);
       }
@@ -150,8 +147,6 @@ let requestSent = false
 const checkYouTube = async () => {
   if (requestSent) return
 
-  console.log("lastUrl", lastUrl)
-  console.log("url:", window.location.href)
   undisplayWindowData()
   if (
     window.location.hostname === "www.youtube.com" &&
@@ -165,8 +160,6 @@ const checkYouTube = async () => {
 
     try {
       const videoAnalysis = await getVideoAnalysis(window.location.href)
-      console.log(videoAnalysis)
-      console.log("passing")
       showNotification("Analysis completed!", "success")
       displayWindowData(videoAnalysis)
       chrome.runtime.sendMessage({
@@ -174,7 +167,6 @@ const checkYouTube = async () => {
         data: { isYtVideo: true, videoAnalysis }
       })
     } catch (e) {
-      console.log("An error occured")
       displayWindowData(e, true)
       showNotification(
         "An error occured while trying to analyize video\nopen popup for more info",
@@ -197,7 +189,6 @@ const checkYouTube = async () => {
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "fetchData") {
-    console.log("Received request to update based on tab")
     requestSent = false
     checkYouTube()
   }
@@ -251,9 +242,7 @@ window.addEventListener("DOMContentLoaded", () => {
   try {
     createToastContainer()
   } catch (e) {
-    console.log(e)
   } finally {
-    console.log("Toast container created")
     // Test toast
     showToast("Content script loaded successfully!")
   }
