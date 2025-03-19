@@ -1,7 +1,7 @@
 const LoadingSquares = () => (
   <div
     className="flex flex-col items-center justify-center w-full h-full"
-    style={{ backgroundColor: "#1A2026" }}>
+    style={{ backgroundColor: "#111827" }}>
     <div className="loader">
       <div className="loader-square"></div>
       <div className="loader-square"></div>

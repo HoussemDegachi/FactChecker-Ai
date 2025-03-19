@@ -154,6 +154,60 @@ body {
   text-align: center;
   width: 100%;
 }
+
+/* Add this to your style.css file */
+
+/* Rainbow color animation for the loader squares */
+@keyframes rainbow-color {
+  0% { background-color: #FF0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }  /* Red */
+  14% { background-color: #FF7F00; box-shadow: 0 0 10px rgba(255, 127, 0, 0.7); }  /* Orange */
+  28% { background-color: #FFFF00; box-shadow: 0 0 10px rgba(255, 255, 0, 0.7); }  /* Yellow */
+  42% { background-color: #00FF00; box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); }  /* Green */
+  56% { background-color: #00FFFF; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); }  /* Cyan */
+  70% { background-color: #0000FF; box-shadow: 0 0 10px rgba(0, 0, 255, 0.7); }  /* Blue */
+  84% { background-color: #8B00FF; box-shadow: 0 0 10px rgba(139, 0, 255, 0.7); }  /* Violet */
+  100% { background-color: #FF0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }  /* Back to red */
+}
+
+/* Update the loader square style to include rainbow animation */
+.loader-square {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  margin: 2px;
+  border-radius: 0px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  animation: 
+    square-animation 10s ease-in-out infinite both,
+    rainbow-color 8s linear infinite;
+}
+
+/* Different color animation speeds for each square to create variety */
+.loader-square:nth-of-type(0) {
+  animation-delay: 0s, 0s;
+}
+.loader-square:nth-of-type(1) {
+  animation-delay: -1.4285714286s, -1s;
+}
+.loader-square:nth-of-type(2) {
+  animation-delay: -2.8571428571s, -2s;
+}
+.loader-square:nth-of-type(3) {
+  animation-delay: -4.2857142857s, -3s;
+}
+.loader-square:nth-of-type(4) {
+  animation-delay: -5.7142857143s, -4s;
+}
+.loader-square:nth-of-type(5) {
+  animation-delay: -7.1428571429s, -5s;
+}
+.loader-square:nth-of-type(6) {
+  animation-delay: -8.5714285714s, -6s;
+}
 /* Wave text animation with changing colors */
 .wave-text {
   font-size: 18px;
