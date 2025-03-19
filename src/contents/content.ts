@@ -1,3 +1,4 @@
+import { title } from "process"
 import type { PlasmoCSConfig } from "plasmo"
 import { toast } from "react-toastify"
 
@@ -33,7 +34,7 @@ const showNotification = (
   notification.id = notificationId
   notification.style.cssText = `
     position: fixed;
-    bottom: 20px;
+    top: 100px;
     right: 20px;
     padding: 12px 16px;
     border-radius: 4px;
@@ -98,8 +99,35 @@ const clearTimelineBubbles = () => {
   }
 }
 
+let warningInternval
+
+const enableWarningOnError = (data) => {
+  warningInternval = setInterval(() => {
+    const videoTime = Math.trunc(document.querySelector("video").currentTime)
+    console.log(videoTime)
+    for (let item of data.data.timestamps) {
+      if (videoTime === item.timestampInS) {
+        showNotification(`${item.label} information detected`, "error")
+      }
+    }
+  }, 1000)
+}
+
+const disableWarningOnError = () => {
+  if (!warningInternval) return
+  clearInterval(warningInternval)
+  warningInternval = undefined
+}
+
 const displayWindowData = (data, isError = false) => {
-  if (!isError) displayTimelineBubbles(data)
+  if (isError) return
+  displayTimelineBubbles(data)
+  enableWarningOnError(data)
+}
+
+const undisplayWindowData = () => {
+  clearTimelineBubbles()
+  disableWarningOnError()
 }
 
 let lastUrl = window.location.href
@@ -110,7 +138,7 @@ const checkYouTube = async () => {
 
   console.log("lastUrl", lastUrl)
   console.log("url:", window.location.href)
-  clearTimelineBubbles()
+  undisplayWindowData()
   if (
     window.location.hostname === "www.youtube.com" &&
     window.location.pathname === "/watch"
@@ -134,7 +162,10 @@ const checkYouTube = async () => {
     } catch (e) {
       console.log("An error occured")
       displayWindowData(e, true)
-      showNotification("An error occured while trying to analyize video\nopen popup for more info", "error")
+      showNotification(
+        "An error occured while trying to analyize video\nopen popup for more info",
+        "error"
+      )
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
         data: { isYtVideo: "error", videoAnalysis: e.response }
