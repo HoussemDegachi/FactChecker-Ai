@@ -78,11 +78,13 @@ const displayTimelineBubbles = (data) => {
 
     const newBubble = document.createElement("span")
     newBubble.style.borderRadius = "50%"
-    newBubble.style.minHeight = "10px"
-    newBubble.style.minWidth = "10px"
-    newBubble.style.backgroundColor = "green"
+    newBubble.style.minHeight = "12px"
+    newBubble.style.minWidth = "12px"
+    newBubble.style.backgroundColor = `${item.label === "Correct"? "green" : item.label === "Misleading"? "yellow" : "#FF004F"}`
+    if (item.label != "Wrong")
+      newBubble.style.opacity = "0.8"
     newBubble.style.position = "absolute"
-    newBubble.style.top = "-50%"
+    newBubble.style.top = "-3px"
     newBubble.style.zIndex = "100"
     newBubble.style.left = `${item.timestampInS * 100 / videoLength}%`
     
