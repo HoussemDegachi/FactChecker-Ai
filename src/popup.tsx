@@ -5,6 +5,9 @@ import Header from "~Sections/Header"
 
 import "./style.css"
 import LoadingSquares from "~Component/LoadingSquares"
+import Error from "~Component/ErrorComp"
+import ErrorComp from "~Component/ErrorComp"
+import NotYoutubeVideo from "~Component/NotYoutubeVideo"
 
 function IndexPopup() {
   const [data, setData] = useState(null)
@@ -48,8 +51,8 @@ function IndexPopup() {
       {!data || data.isYtVideo === null ? (
         <LoadingSquares />
       ) : !data.isYtVideo ? (
-        "Not a youtube video"
-      ) : data.isYtVideo === "error"? "An error occured" : (
+        <NotYoutubeVideo />
+      ) : data.isYtVideo === "error"? <ErrorComp errorData={data.videoAnalysis.data} /> : (
         <>
           <Header isAnalyzing={true} />
           <div
