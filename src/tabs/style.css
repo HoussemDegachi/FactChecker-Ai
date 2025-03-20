@@ -1,5 +1,5 @@
 :root {
-    --primary: #4F46E5;
+    --primary: #8f8aeb;
     --primary-light: #818CF8;
     --primary-dark: #4338CA;
     --accent: #10B981;
@@ -339,6 +339,9 @@ p {
     color: var(--text-tertiary);
 }
 
+.source-meta a{
+    color: #267794;
+}
 .source-rating {
     display: flex;
     align-items: center;
@@ -847,6 +850,11 @@ p {
 /* Charts */
 .chart-section {
     margin-bottom: 2rem;
+    margin-bottom: 6em;
+
+}
+.chart-section h3{
+    margin-top: 3em;
 }
 
 .chart-container {

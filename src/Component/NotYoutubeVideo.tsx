@@ -36,7 +36,7 @@ function NotYoutubeVideo() {
         </div>
 
         {/* Text message */}
-        <h2 className="text-cyan-400 text-2xl font-bold mb-2 text-center">Not a YouTube Video</h2>
+        <h2 className="text-cyan-400 text-2xl font-bold mb-2 text-center">Play a YouTube video</h2>
         <p className="text-gray-300 text-center max-w-xs">
           This extension only works on YouTube video pages. Navigate to a YouTube video to analyze facts.
         </p>
