@@ -96,7 +96,7 @@ This map will help you navigate the project and locate key files with ease!
 Clone the project:
 
 ```bash
-git clone -b master --single-branch https://github.com/HoussemDegachi/missinformation-detector.git
+git clone https://github.com/HoussemDegachi/FactChecker-Ai
 ```
 
 Navigate to the project directory:

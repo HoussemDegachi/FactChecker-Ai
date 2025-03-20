@@ -43,29 +43,6 @@ function IndexPopup() {
     }
     return () => port.disconnect();
   }, []);
-console.log("hi")
-  useEffect(() => {
-    if (data && data.isYtVideo) {
-      const interval = setInterval(() => {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          chrome.tabs.sendMessage(tabs[0].id, { action: "getCurrentTime" }, (response) => {
-            if (response && response.currentTime !== undefined) {
-              console.log(response)
-              const currentTime = response.currentTime;
-              const factCardIndex = data.videoAnalysis.data.timestamps.findIndex(
-                (item) => item.timestampInS && item.timestampInS <= currentTime && currentTime < item.timestampInS + 5
-              );
-              if (factCardIndex !== -1 && factCardRefs.current[factCardIndex]) {
-                factCardRefs.current[factCardIndex].scrollIntoView({ behavior: "smooth", block: "center" });
-              }
-            }
-          });
-        });
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [data]);
 
   return (
     <div
