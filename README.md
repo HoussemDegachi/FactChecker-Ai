@@ -93,6 +93,8 @@ This map will help you navigate the project and locate key files with ease!
 
 ## 🚀 Run Our Extension Locally
 
+make sure you download the [backend](https://github.com/HoussemDegachi/factChecker-Ai-b)
+
 Clone the project:
 
 ```bash
@@ -117,14 +119,16 @@ Start the application:
 pnpm dev
 ```
 
+then import the extension to your browser (we would recommend you use a chrome based brwoser)
+
 ## 🎥 Recommended YouTube Videos for Testing  
 
 To see **FactChecker AI** in action, try analyzing videos that contain a mix of **verified facts, misleading claims, and misinformation**.  
 Here are some recommended test videos:  
 
-1️⃣ **[Video Title 1](https://www.youtube.com/watch?v=VIDEO_ID_1)** – Covers controversial topics with mixed claims.  
-2️⃣ **[Video Title 2](https://www.youtube.com/watch?v=VIDEO_ID_2)** – Features known misinformation for AI accuracy testing.  
-3️⃣ **[Video Title 3](https://www.youtube.com/watch?v=VIDEO_ID_3)** – A factual documentary to compare against misinformation.  
+1️⃣ **[Microsoft goes nuclear on TypeScript codebase](https://www.youtube.com/watch?v=PQ2WjtaPfXU)** – Video that contains wrong information.  
+2️⃣ **[How do executive orders work? - Christina Greer](https://www.youtube.com/watch?v=oyOf3g-PJ94&t=3s)** – Video that contains mostly correct infromation.  
+3️⃣ **[Machine Learning vs Deep Learning](https://www.youtube.com/watch?v=o3bWqPdWJ88&t=170s)** – Another video with correct information
 
 🔹 *Testing on diverse content helps evaluate the AI's accuracy and performance!*  
 
@@ -138,8 +142,8 @@ This helps mitigate potential **token limitations** and enhances the AI's abilit
 Thanks to these amazing people who helped build FactChecker AI! 🚀
 
 - [Omar Abd](https://github.com/omarAbd19) – AI & Backend
-- [Houseen](https://github.com/HoussemDegachi) – Full Stack
-- [Fatima Ezzahra](https://github.com/FatimaEzzahraLegchayri) –Website
+- [Houssem Degachi](https://github.com/HoussemDegachi) – Full Stack
+- [Fatima Ezzahra](https://github.com/FatimaEzzahraLegchayri) – Website
 - [Mostafa Yaser](https://github.com/mostafammy) – Extension
 
 
