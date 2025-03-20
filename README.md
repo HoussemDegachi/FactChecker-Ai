@@ -144,6 +144,8 @@ Here are some recommended test videos:
 To ensure **accurate & fast results**, we recommend watching a video not longer then **5–10 minutes**.  
 This helps mitigate potential **token limitations** and enhances the AI's ability to detect misinformation effectively.  
 
+Please be patient when waiting for the results as they take some time (10-20s & less then 30s in worst conditions) to be generated 
+
 
 ## 👥 Contributors
 Thanks to these amazing people who helped build FactChecker AI! 🚀
