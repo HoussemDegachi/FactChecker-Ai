@@ -93,7 +93,8 @@ This map will help you navigate the project and locate key files with ease!
 
 ## 🚀 Run Our Extension Locally
 
-make sure you download the [backend](https://github.com/HoussemDegachi/factChecker-Ai-b)
+[backend](https://github.com/HoussemDegachi/factChecker-Ai-b) is not required to be downloaded
+the backend is hosted, open the repo for more info
 
 Clone the project:
 
