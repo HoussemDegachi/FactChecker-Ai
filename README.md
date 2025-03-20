@@ -134,7 +134,7 @@ Here are some recommended test videos:
 
 ## ⚠️ Important Notice  
 
-To ensure the most **accurate results**, we recommend watching at most **5–10 minutes** of a video before analysis.  
+To ensure **accurate & fast results**, we recommend watching a video not longer then **5–10 minutes**.  
 This helps mitigate potential **token limitations** and enhances the AI's ability to detect misinformation effectively.  
 
 
