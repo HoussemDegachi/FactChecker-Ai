@@ -857,7 +857,7 @@ p {
 
 /* Bar chart simulation */
 .bar-chart {
-    height: fit-content; 
+    height: 300px;
     display: flex;
     align-items: flex-end;
     gap: 12px;
