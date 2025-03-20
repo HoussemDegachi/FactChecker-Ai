@@ -80,13 +80,11 @@ const showNotification = (
 }
 
 const displayTimelineBubbles = (data) => {
-  console.log(data)
   const timebar = document.querySelector(".ytp-progress-bar")
   const videoLength = document.querySelector("video").duration
 
   for (let item of data.data.timestamps) {
     if (!item.timestampInS) continue
-    console.log(item.timestampInS)
 
     const newBubble = document.createElement("span")
     newBubble.classList.add("timeline-bubble")
@@ -149,10 +147,14 @@ const undisplayWindowData = () => {
 }
 
 let requestSent = false
-let lastUrl = window.location.href
+let lastUrl
 
 const checkYouTube = async () => {
-  if (lastUrl !== window.location.href) requestSent = false
+  console.log(lastUrl, window.location.href)
+  if (lastUrl !== window.location.href) {
+    requestSent = false
+    lastUrl = window.location.href
+  }
   if (requestSent) return
 
   undisplayWindowData()
@@ -167,6 +169,7 @@ const checkYouTube = async () => {
     })
 
     try {
+    requestSent = true
       const videoAnalysis = await getVideoAnalysis(window.location.href)
       showNotification("Analysis completed!", "success")
       displayWindowData(videoAnalysis)
@@ -191,8 +194,6 @@ const checkYouTube = async () => {
       data: { isYtVideo: false }
     })
   }
-
-  requestSent = true
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

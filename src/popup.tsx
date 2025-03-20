@@ -55,7 +55,7 @@ function IndexPopup() {
         <LoadingSquares />
       ) : !data.isYtVideo ? (
         <NotYoutubeVideo />
-      ) : data.isYtVideo === "error" ? (
+      ) : (data.isYtVideo === "error" || (data.videoAnalysis && !data.videoAnalysis.data)) ? (
         <ErrorComp errorData={data.videoAnalysis.data} />
       ) : (
         <>
