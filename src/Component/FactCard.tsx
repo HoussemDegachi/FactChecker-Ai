@@ -1,10 +1,18 @@
-import React from "react"
+import React, { forwardRef } from "react";
 
-import TimeStamp from "./TimeStamp"
-import { CheckCircle, Clock, XCircle } from "lucide-react"
+import TimeStamp from "./TimeStamp";
+import { CheckCircle, Clock, XCircle } from "lucide-react";
 
-const FactCard = ({ TrueFact, data }) => {
+interface FactCardProps {
+  TrueFact: boolean;
+  data: {
+    timestampInStr: string;
+    claim: string;
+    explanation: string;
+  };
+}
 
+const FactCard = forwardRef<HTMLDivElement, FactCardProps>(({ TrueFact, data }, ref) => {
   // Neon color scheme inspired by loading animation
   const colors = {
     true: {
@@ -28,6 +36,7 @@ const FactCard = ({ TrueFact, data }) => {
 
   return (
     <div
+      ref={ref}
       className="w-full mb-4 relative rounded-lg mx-2"
       style={{
         backgroundColor: colors.neutral.cardBg,
@@ -103,6 +112,7 @@ const FactCard = ({ TrueFact, data }) => {
         </div>
       </div>
     </div>
-  )
-}
-export default FactCard
+  );
+});
+
+export default FactCard;

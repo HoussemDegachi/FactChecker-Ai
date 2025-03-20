@@ -1,5 +1,5 @@
 // IndexPopup.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FactCard from "~Component/FactCard";
 import Header from "~Sections/Header";
 import "./style.css";
@@ -10,6 +10,7 @@ import AnimatedButton from "~Component/Button";
 
 function IndexPopup() {
   const [data, setData] = useState(null);
+  const factCardRefs = useRef([]);
 
     const openIndepthAnalysisPage = () => {
       chrome.storage.local.set({ videoAnalysisData: data.videoAnalysis.data }, () => {
@@ -42,6 +43,30 @@ function IndexPopup() {
     }
     return () => port.disconnect();
   }, []);
+console.log("hi")
+  useEffect(() => {
+    if (data && data.isYtVideo) {
+      const interval = setInterval(() => {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          chrome.tabs.sendMessage(tabs[0].id, { action: "getCurrentTime" }, (response) => {
+            if (response && response.currentTime !== undefined) {
+              console.log(response)
+              const currentTime = response.currentTime;
+              const factCardIndex = data.videoAnalysis.data.timestamps.findIndex(
+                (item) => item.timestampInS && item.timestampInS <= currentTime && currentTime < item.timestampInS + 5
+              );
+              if (factCardIndex !== -1 && factCardRefs.current[factCardIndex]) {
+                factCardRefs.current[factCardIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+              }
+            }
+          });
+        });
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [data]);
+
   return (
     <div
       className={
@@ -63,11 +88,12 @@ function IndexPopup() {
               "absolute top-[60px] max-h-[540px] flex flex-col mt-1 w-full pr-4 scroll-smooth overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full  [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full  [&::-webkit-scrollbar-thumb]:bg-gray-300  dark:[&::-webkit-scrollbar-track]:bg-neutral-700  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
             }
           >
-            {data.videoAnalysis.data.timestamps.map((item) => (
+            {data.videoAnalysis.data.timestamps.map((item, index) => (
               <FactCard
                 TrueFact={item.validation.isValid}
                 key={item._id}
                 data={item}
+                ref={(el) => (factCardRefs.current[index] = el)}
               />
             ))}
 

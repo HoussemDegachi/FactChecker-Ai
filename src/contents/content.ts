@@ -80,11 +80,13 @@ const showNotification = (
 }
 
 const displayTimelineBubbles = (data) => {
+  console.log(data)
   const timebar = document.querySelector(".ytp-progress-bar")
   const videoLength = document.querySelector("video").duration
 
   for (let item of data.data.timestamps) {
     if (!item.timestampInS) continue
+    console.log(item.timestampInS)
 
     const newBubble = document.createElement("span")
     newBubble.classList.add("timeline-bubble")
@@ -98,7 +100,7 @@ const displayTimelineBubbles = (data) => {
     newBubble.style.top = "-3px"
     newBubble.style.zIndex = "100"
     newBubble.style.left = `${(item.timestampInS * 100) / videoLength}%`
-
+    console.log(newBubble)
     timebar.append(newBubble)
   }
 }
@@ -187,10 +189,18 @@ const checkYouTube = async () => {
   requestSent = true
 }
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "fetchData") {
     requestSent = false
     checkYouTube()
+  } else if (message.action === "getCurrentTime") {
+    console.log("hey teg")
+    const video = document.querySelector("video");
+    if (video) {
+      sendResponse({ currentTime: video.currentTime });
+    } else {
+      sendResponse({ currentTime: 0 });
+    }
   }
 })
 
