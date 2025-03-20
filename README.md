@@ -104,7 +104,13 @@ git clone https://github.com/HoussemDegachi/FactChecker-Ai
 Navigate to the project directory:
 
 ```bash
-cd missinformation-detector
+cd FactChecker-Ai
+```
+
+install pnpm
+
+```bash
+npm install -g pnpm@latest-10
 ```
 
 Install dependencies:
