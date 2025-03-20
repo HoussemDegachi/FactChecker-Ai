@@ -13,7 +13,7 @@ toast("Content script loaded", {
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true
-});
+})
 
 const ColorsSet = {
   info: "#4F46E5",
@@ -22,24 +22,24 @@ const ColorsSet = {
   success: "#10B981",
   wrong: "#EF4444",
   error: "#EF4444"
-};
+}
 
 // Simple notification function for content script
 const showNotification = (
   message: string,
   type: "info" | "success" | "error" | "misleading" = "info"
 ) => {
-  const notificationId = "info-checker-notification";
+  const notificationId = "info-checker-notification"
 
   // Remove existing notification if any
-  const existingNotification = document.getElementById(notificationId);
+  const existingNotification = document.getElementById(notificationId)
   if (existingNotification) {
-    existingNotification.remove();
+    existingNotification.remove()
   }
 
   // Create notification element
-  const notification = document.createElement("div");
-  notification.id = notificationId;
+  const notification = document.createElement("div")
+  notification.id = notificationId
   notification.style.cssText = `
     position: fixed;
     top: 100px;
@@ -52,71 +52,71 @@ const showNotification = (
     z-index: 99999;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-  `;
+  `
 
   // Set color based on type
   switch (type) {
     case "success":
-      notification.style.backgroundColor = ColorsSet.success;
-      break;
+      notification.style.backgroundColor = ColorsSet.success
+      break
     case "error":
-      notification.style.backgroundColor = ColorsSet.error;
-      break;
+      notification.style.backgroundColor = ColorsSet.error
+      break
     case "misleading":
-      notification.style.backgroundColor = ColorsSet.misleading;
-      break;
+      notification.style.backgroundColor = ColorsSet.misleading
+      break
     default:
-      notification.style.backgroundColor = ColorsSet.info;
+      notification.style.backgroundColor = ColorsSet.info
   }
 
-  notification.textContent = message;
-  document.body.appendChild(notification);
+  notification.textContent = message
+  document.body.appendChild(notification)
 
   // Auto-remove after 5 seconds
   setTimeout(() => {
-    notification.style.opacity = "0";
-    setTimeout(() => notification.remove(), 300);
-  }, 5000);
-};
+    notification.style.opacity = "0"
+    setTimeout(() => notification.remove(), 300)
+  }, 5000)
+}
 
 const displayTimelineBubbles = (data) => {
-  console.log(data);
-  const timebar = document.querySelector(".ytp-progress-bar");
-  const videoLength = document.querySelector("video").duration;
+  console.log(data)
+  const timebar = document.querySelector(".ytp-progress-bar")
+  const videoLength = document.querySelector("video").duration
 
   for (let item of data.data.timestamps) {
-    if (!item.timestampInS) continue;
-    console.log(item.timestampInS);
+    if (!item.timestampInS) continue
+    console.log(item.timestampInS)
 
-    const newBubble = document.createElement("span");
-    newBubble.classList.add("timeline-bubble");
-    newBubble.style.borderRadius = "50%";
-    newBubble.style.minHeight = "12px";
-    newBubble.style.minWidth = "12px";
-    newBubble.style.transform = "translate(-30%,0)"; // Center the bubble and Making It More Accurate.
-    newBubble.style.backgroundColor = `${item.label === "Correct" ? ColorsSet.correct : item.label === "Misleading" ? ColorsSet.misleading : ColorsSet.wrong}`;
-    if (item.label != "Wrong") newBubble.style.opacity = "0.8";
-    newBubble.style.position = "absolute";
-    newBubble.style.top = "-3px";
-    newBubble.style.zIndex = "100";
-    newBubble.style.left = `${(item.timestampInS * 100) / videoLength}%`;
-    console.log(newBubble);
-    timebar.append(newBubble);
+    const newBubble = document.createElement("span")
+    newBubble.classList.add("timeline-bubble")
+    newBubble.style.borderRadius = "50%"
+    newBubble.style.minHeight = "12px"
+    newBubble.style.minWidth = "12px"
+    newBubble.style.transform = "translate(-30%,0)" // Center the bubble and Making It More Accurate.
+    newBubble.style.backgroundColor = `${item.label === "Correct" ? ColorsSet.correct : item.label === "Misleading" ? ColorsSet.misleading : ColorsSet.wrong}`
+    if (item.label != "Wrong") newBubble.style.opacity = "0.8"
+    newBubble.style.position = "absolute"
+    newBubble.style.top = "-3px"
+    newBubble.style.zIndex = "100"
+    newBubble.style.left = `${(item.timestampInS * 100) / videoLength}%`
+    console.log(newBubble)
+    timebar.append(newBubble)
   }
-};
+}
 
 const clearTimelineBubbles = () => {
-  const bubbles = document.querySelectorAll(".timeline-bubble");
+  const bubbles = document.querySelectorAll(".timeline-bubble")
   for (let bubble of bubbles) {
-    bubble.remove();
+    bubble.remove()
   }
-};
+}
 
-let warningInterval;
+let warningInterval
 
 const enableWarningOnError = (data) => {
   warningInterval = setInterval(() => {
-    const videoTime = Math.trunc(document.querySelector("video").currentTime);
+    const videoTime = Math.trunc(document.querySelector("video").currentTime)
     for (let item of data.data.timestamps) {
       if (videoTime === item.timestampInS && item.label !== "Correct") {
         const NotificationType =
@@ -124,134 +124,141 @@ const enableWarningOnError = (data) => {
             ? "success"
             : item.label === "Misleading"
               ? "misleading"
-              : "error"; // Set notification type based on label
-        showNotification(`${item.label} information detected`, NotificationType);
+              : "error" // Set notification type based on label
+        showNotification(`${item.label} information detected`, NotificationType)
       }
     }
-  }, 1000);
-};
+  }, 1000)
+}
 
 const disableWarningOnError = () => {
-  if (!warningInterval) return;
-  clearInterval(warningInterval);
-  warningInterval = undefined;
-};
+  if (!warningInterval) return
+  clearInterval(warningInterval)
+  warningInterval = undefined
+}
 
 const displayWindowData = (data, isError = false) => {
-  if (isError) return;
-  displayTimelineBubbles(data);
-  enableWarningOnError(data);
-};
+  if (isError) return
+  displayTimelineBubbles(data)
+  enableWarningOnError(data)
+}
 
 const undisplayWindowData = () => {
-  clearTimelineBubbles();
-  disableWarningOnError();
-};
+  clearTimelineBubbles()
+  disableWarningOnError()
+}
 
-let lastUrl = window.location.href;
-let requestSent = false;
+let requestSent = false
+let lastUrl = window.location.href
 
 const checkYouTube = async () => {
-  if (requestSent) return;
+  if (lastUrl !== window.location.href) requestSent = false
+  if (requestSent) return
 
-  undisplayWindowData();
+  undisplayWindowData()
   if (
     window.location.hostname === "www.youtube.com" &&
     window.location.pathname === "/watch"
   ) {
-    showNotification("Analyzing video for factual accuracy...", "info");
+    showNotification("Analyzing video for factual accuracy...", "info")
     chrome.runtime.sendMessage({
       type: "UPDATE_UI",
       data: { isYtVideo: null }
-    });
+    })
 
     try {
-      const videoAnalysis = await getVideoAnalysis(window.location.href);
-      showNotification("Analysis completed!", "success");
-      displayWindowData(videoAnalysis);
+      const videoAnalysis = await getVideoAnalysis(window.location.href)
+      showNotification("Analysis completed!", "success")
+      displayWindowData(videoAnalysis)
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
         data: { isYtVideo: true, videoAnalysis }
-      });
+      })
     } catch (e) {
-      displayWindowData(e, true);
+      displayWindowData(e, true)
       showNotification(
         "An error occurred while trying to analyze video\nopen popup for more info",
         "error"
-      );
+      )
       chrome.runtime.sendMessage({
         type: "UPDATE_UI",
         data: { isYtVideo: "error", videoAnalysis: e.response }
-      });
+      })
     }
   } else {
     chrome.runtime.sendMessage({
       type: "UPDATE_UI",
       data: { isYtVideo: false }
-    });
+    })
   }
 
-  requestSent = true;
-};
+  requestSent = true
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "checkYouTube") {
+    checkYouTube()
+  }
+})
 
 const createToastContainer = () => {
-  const container = document.createElement("div");
-  container.id = "plasmo-toast-container";
-  document.body.appendChild(container);
+  const container = document.createElement("div")
+  container.id = "plasmo-toast-container"
+  document.body.appendChild(container)
 
-  const shadowRoot = container.attachShadow({ mode: "open" });
+  const shadowRoot = container.attachShadow({ mode: "open" })
 
   // Add toastify styles
-  const style = document.createElement("style");
+  const style = document.createElement("style")
   style.textContent = `
   /* Minified CSS from react-toastify */
   .Toastify__toast-container{position:fixed;z-index:9999;...}
   /* ... rest of react-toastify CSS ... */
-  `;
-  shadowRoot.appendChild(style);
+  `
+  shadowRoot.appendChild(style)
 
   // Create the actual container
-  const toastContainer = document.createElement("div");
-  shadowRoot.appendChild(toastContainer);
+  const toastContainer = document.createElement("div")
+  shadowRoot.appendChild(toastContainer)
 
-  return toastContainer;
-};
+  return toastContainer
+}
 
 // Function to show toast notifications from content script
 const showToast = (message, type = "info") => {
   // Simple implementation using the shadow DOM
   const container = document
     .getElementById("plasmo-toast-container")
-    ?.shadowRoot?.querySelector("div");
-  if (!container) return;
+    ?.shadowRoot?.querySelector("div")
+  if (!container) return
 
-  const toast = document.createElement("div");
-  toast.className = `Toastify__toast Toastify__toast--${type}`;
-  toast.textContent = message;
+  const toast = document.createElement("div")
+  toast.className = `Toastify__toast Toastify__toast--${type}`
+  toast.textContent = message
 
-  container.appendChild(toast);
+  container.appendChild(toast)
 
   // Auto-remove after 5 seconds
   setTimeout(() => {
-    toast.remove();
-  }, 5000);
-};
+    toast.remove()
+  }, 5000)
+}
 
 // Initialize when DOM is ready
 window.addEventListener("DOMContentLoaded", () => {
   try {
-    createToastContainer();
+    createToastContainer()
   } catch (e) {
   } finally {
     // Test toast
-    showToast("Content script loaded successfully!");
+    showToast("Content script loaded successfully!")
   }
-});
+})
 
 // Show initial notification
 if (
   window.location.hostname === "www.youtube.com" &&
   window.location.pathname === "/watch"
 )
-  showNotification("Info Checker extension activated", "info");
-checkYouTube(); // initial
+  showNotification("Info Checker extension activated", "info")
+checkYouTube() // initial
