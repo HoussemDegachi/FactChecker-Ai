@@ -117,6 +117,23 @@ Start the application:
 pnpm dev
 ```
 
+## 🎥 Recommended YouTube Videos for Testing  
+
+To see **FactChecker AI** in action, try analyzing videos that contain a mix of **verified facts, misleading claims, and misinformation**.  
+Here are some recommended test videos:  
+
+1️⃣ **[Video Title 1](https://www.youtube.com/watch?v=VIDEO_ID_1)** – Covers controversial topics with mixed claims.  
+2️⃣ **[Video Title 2](https://www.youtube.com/watch?v=VIDEO_ID_2)** – Features known misinformation for AI accuracy testing.  
+3️⃣ **[Video Title 3](https://www.youtube.com/watch?v=VIDEO_ID_3)** – A factual documentary to compare against misinformation.  
+
+🔹 *Testing on diverse content helps evaluate the AI's accuracy and performance!*  
+
+## ⚠️ Important Notice  
+
+To ensure the most **accurate results**, we recommend watching at most **5–10 minutes** of a video before analysis.  
+This helps mitigate potential **token limitations** and enhances the AI's ability to detect misinformation effectively.  
+
+
 ## 👥 Contributors
 Thanks to these amazing people who helped build FactChecker AI! 🚀
 
