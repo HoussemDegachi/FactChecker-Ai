@@ -56,9 +56,9 @@ This map will help you navigate the project and locate key files with ease!
 
 ## 🖼️ Screenshots & GIFs
 
-![Screenshot 1](/screenshots/screenshot1.png)
+![Screenshot 1](https://github.com/HoussemDegachi/FactChecker-Ai/blob/7081aff65888eaeacc0d9508d8f67d11e0ddafcb/Screenshot%202025-03-20%20220357.png)
 
-![Screenshot 2](/screenshots/screenshot2.png)
+![Screenshot 2](https://github.com/HoussemDegachi/FactChecker-Ai/blob/7081aff65888eaeacc0d9508d8f67d11e0ddafcb/Screenshot%202025-03-20%20220420.png)
 
 ## 🎬 Demo
 
