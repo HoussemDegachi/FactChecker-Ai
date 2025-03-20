@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="https://drive.google.com/file/d/1IJPXECGSKOnnwK7eh_rD-vTq7UZJ-cvg/view?usp=sharing" width="150px" alt="Project Logo" />
+   <img src="https://github.com/HoussemDegachi/missinformation-detector/blob/a26879c6e3f073f244b7f81cb8fef04b338827c9/FactCheckeraiLogo.png" width="150px" alt="Project Logo" />
     <h1>Fact Checker Ai</h1>
 </div>
 
