@@ -123,7 +123,7 @@ pnpm install
 Start the application:
 
 ```bash
-pnpm dev
+pnpm run dev
 ```
 
 then import the extension to your browser (we would recommend you use a chrome based brwoser)
