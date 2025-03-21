@@ -62,10 +62,10 @@ This map will help you navigate the project and locate key files with ease!
 
 ## 🎬 Demo
 
-🚀 See FactChecker AI in action! Watch our demo video to understand how it detects misinformation on YouTube in real time.
-📺 Watch the Demo on YouTube.
+🚀 See FactChecker AI in action! Watch our demo video to understand how it detects misinformation in real-time.
+📺 Watch the Demo.
 
-(Click the image to watch!)
+(Click [Here](https://drive.google.com/file/d/125wjlNPwnspAFs6iOoL-U4JNhR0JT3BC/view?usp=sharing) to watch!)
 
 💡 How It Works:
 
